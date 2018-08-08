@@ -1,0 +1,31 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "func-names": ["error", "never"],
+    "indent": [2],
+    "max-len": ["error", {
+      "code": 120,
+      "ignoreComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }],
+    "import/no-dynamic-require": "off",
+    "global-require": 0,
+    "no-param-reassign": [2, {
+      "props": false
+    }],
+    "no-underscore-dangle": ["error", { "allow": ["__app"] }],
+    "consistent-return": "off"
+  },
+  "globals": {
+    "__app": true
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  }
+}
+

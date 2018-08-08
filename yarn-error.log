@@ -1,0 +1,76 @@
+Arguments: 
+  /usr/local/Cellar/node/10.3.0/bin/node /usr/local/Cellar/yarn/1.6.0/libexec/bin/yarn.js
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/alex/golang/bin:/usr/local/opt/go/libexec/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  10.3.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/alex/golang/conekta/package.json: Unexpected token } in JSON at position 522
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:109:13
+
+npm manifest: 
+  {
+    "name": "conekta-wallet",
+    "version": "0.0.1",
+    "description": "Lab Conekta Wallet",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/AlexisLeon/conekta.git"
+    },
+    "author": "Alexis Leon <alexis.leon@icloud.com>",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/AlexisLeon/conekta/issues"
+    },
+    "homepage": "https://github.com/AlexisLeon/conekta#readme",
+    "dependencies": {
+      "express": "^4.16.2",
+    },
+    "devDependencies": {
+      "babel-cli": "^6.26.0",
+      "babel-eslint": "^8.2.1",
+      "babel-preset-env": "^1.6.1",
+      "eslint": "^4.17.0",
+      "eslint-config-airbnb": "^16.1.0",
+      "eslint-config-airbnb-base": "^12.1.0",
+      "eslint-plugin-import": "^2.8.0",
+      "eslint-plugin-jsx-a11y": "^6.0.2",
+      "eslint-plugin-react": "^7.6.1",
+      "jest": "^22.1.4",
+      "nodemon": "^1.14.12",
+      "snyk": "^1.69.6",
+      "superagent": "^3.8.2",
+      "supertest": "^3.0.0"
+    },
+    "jest": {
+      "testPathIgnorePatterns": [
+        "<rootDir>/node_modules/",
+        "<rootDir>/__tests__/config.js",
+        "<rootDir>/__tests__/setup.js"
+      ],
+      "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup.js"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
