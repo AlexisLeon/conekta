@@ -1,3 +1,59 @@
 {
+  "app": {
+    "locale": "es-MX",
+    "application": "wallet-api",
+    "applicationUid": "wallet-api",
+    "applicationPassword": "secretpassword",
+    "environment": "development",
+    "cryptoKey": "CUSTOM_CRYPTOKEY",
+    "host": "localhost",
+    "port": "3000",
+    "timeout": 600000,
+    "log": "dev"
+  },
 
+  "oauth": {
+    "secretKey": "Ui3RhW1lclIiwibOntwicW9aWZ5IiwiayI6WyJyZXF1aXJW9fSk5pdCIsIm",
+    "algorithm": "HS256",
+    "expiresIn": "30 minutes"
+  },
+
+  "sentry": {
+    "key": "1234567890",
+    "secret": "1234567890",
+    "project": "12345"
+  },
+
+  "mongo": {
+    "uri": "mongodb://localhost/conekta",
+    "host": "MONGODB_HOST",
+    "user": "MONGODB_USER",
+    "password": "MONGODB_PASS",
+    "database": "MONGODB_DB",
+    "port": "MONGODB_PORT"
+  },
+
+  "mysql": {
+    "database": "conektadev",
+    "username": "root",
+    "password": "",
+    "host": "localhost",
+    "port": 3036,
+    "logging": true
+  },
+
+  "conekta": {
+    "key": "qwertyuiop1234567890"
+  },
+
+  "mail": {
+    "account": "no-reply@conekta.com",
+    "password": "1234567890"
+  },
+
+  "aws": {
+    "ses": {
+      "source": "no-reply@conekta.com"
+    }
+  }
 }
