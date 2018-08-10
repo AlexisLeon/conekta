@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "46ebc2b7-095f-4f0e-8cc7-64b6c6e51ba4",
+		"name": "Conekta Wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Get Cards",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50853c3b-783c-478b-bac9-de08b2316e78",
+								"type": "text/javascript",
+								"exec": [
+									"const { id } = pm.response.json()[0]",
+									"",
+									"pm.environment.set(\"CARD_ID\", id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_PROTOCOL}}://{{API_HOST}}/v1/cards",
+							"protocol": "{{API_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"v1",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{API_PROTOCOL}}://{{API_HOST}}/v1/cards/{{CARD_ID}}",
+							"protocol": "{{API_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"v1",
+								"cards",
+								"{{CARD_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0c545dd-8873-47ee-88ac-0078ed25e162",
+								"type": "text/javascript",
+								"exec": [
+									"const { id } = pm.response.json()",
+									"",
+									"pm.environment.set(\"CARD_ID\", id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\": \"4242424242424242\",\n\t\"expirationMonth\": \"09\",\n\t\"expirationYear\": \"18\",\n\t\"cvc\": \"690\",\n\t\"holderName\": \"Alex Leon\"\n}"
+						},
+						"url": {
+							"raw": "{{API_PROTOCOL}}://{{API_HOST}}/v1/cards",
+							"protocol": "{{API_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"v1",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"alexis.leon@icloud.com\",\n\t\"password\": \"dev\",\n\t\"firstName\": \"Alex\",\n\t\"lastName\": \"Leon\"\n}"
+				},
+				"url": {
+					"raw": "{{API_PROTOCOL}}://{{API_HOST}}/register",
+					"protocol": "{{API_PROTOCOL}}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Oauth login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c09bf81-59fa-488a-920a-11fbd4ef446e",
+						"type": "text/javascript",
+						"exec": [
+							"const { access_token, refresh_token } = pm.response.json()",
+							"",
+							"pm.environment.set(\"ACCESS_TOKEN\", access_token);",
+							"pm.environment.set(\"REFRESH_TOKEN\", refresh_token);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "conekta-client",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "conekta-secret",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "alexis.leon@icloud.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dev",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{API_PROTOCOL}}://{{API_HOST}}/oauth/token",
+					"protocol": "{{API_PROTOCOL}}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "Login via basic token + username:password user credentials"
+			},
+			"response": []
+		},
+		{
+			"name": "Get service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API_PROTOCOL}}://{{API_HOST}}/health",
+					"protocol": "{{API_PROTOCOL}}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a10f4caf-352e-4bab-93f5-156751d05efe",
+						"type": "text/javascript",
+						"exec": [
+							"const { id } = pm.response.json()",
+							"",
+							"pm.environment.set(\"CUSTOMER_ID\", id);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API_PROTOCOL}}://{{API_HOST}}/v1/me",
+					"protocol": "{{API_PROTOCOL}}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"v1",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "815c8376-a076-4190-b102-9a92f38e373f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API_PROTOCOL}}://{{API_HOST}}/v1/transactions",
+					"protocol": "{{API_PROTOCOL}}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
