@@ -30,9 +30,9 @@ module.exports = (clientId, clientSecret) => {
   // NOTE: Query client to enable 3rd party clients
   return {
     id: 1,
-    name: 'Norde mobile app',
+    name: 'Conekta Wallet',
     client_id: DEFAULT_CLIENT_ID,
-    redirectUris: ['https://app.norde.mx/login?redirect=/apps/home'],
+    redirectUris: ['https://app.conektawallet.mx/login?redirect=/apps/home'],
     grants: ['password', 'refresh_token'], // 2-legged oauth
     scope: DEFAULT_SCOPE,
   };
