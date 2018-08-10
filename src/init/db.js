@@ -26,7 +26,7 @@ const db = new Sequelize(
 db.Customer = db.import('../models/Customer');
 db.Balance = db.import('../models/Balance');
 // db.Card = db.import('../models/Card');
-// db.Transaction = db.import('../models/Transaction');
+db.Transaction = db.import('../models/Transaction');
 
 // Oauth Models
 db.OAuthAccessToken = db.import('../models/oauth/OAuthAccessToken');
