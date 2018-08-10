@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/lab_conekta_wallet
+
+    docker:
+      - image: circleci/node:9.8
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ubuntu
+          MYSQL_DATABASE: conektadev
+          MYSQL_USER: root
+          MYSQL_PASSWORD: ''
+
+      - image: circleci/mysql:5.7.18
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: conektadev
+          MYSQL_USER: root
+          MYSQL_PASSWORD: ''
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ .Branch }}-{{ .Revision }}-{{ checksum "package.json" }}
+            - v1-dependencies
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ .Branch }}-{{ .Revision }}-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn run test --maxWorkers=1 --silent=false
+      # - run: yarn lint
