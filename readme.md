@@ -1,5 +1,7 @@
 # Lab Conekta Wallet
 
+Staging: [conektawallet.herokuapp.com](https://conektawallet.herokuapp.com/)
+
 ## Requirements
 
   - Node.js
@@ -14,8 +16,7 @@
 
 ## Run
   - Start server: `yarn run dev`
-  - Start server: `yarn run dev`
-  - Test: `yarn test`
+  - Open [localhost:3000](https://localhost:3000)
 
 ## Other commands
   - Production: `yarn start`
