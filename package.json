@@ -67,6 +67,7 @@
     "testURL": "http://localhost:3000/",
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
+      "<rootDir>/__tests__/modules.js",
       "<rootDir>/__tests__/helpers.js",
       "<rootDir>/__tests__/config.js",
       "<rootDir>/__tests__/setup.js"

@@ -1,9 +1,6 @@
-const request = require('supertest');
-const app = require('../../server');
 const config = require('../config');
+const register = require('../modules').register();
 
-let headers;
-let endpoint;
 let body;
 const initialBody = {
   email: config.credentials.username,
@@ -13,35 +10,12 @@ const initialBody = {
 };
 
 describe('Register new user', () => {
-  beforeAll(() => {
-    endpoint = '/register';
-  });
-
   beforeEach(() => {
-    headers = {
-      'Content-Type': 'application/json',
-    };
-
     body = initialBody;
   });
 
-  test('Should create a new user', () => request(app)
-    .post(endpoint)
-    .set(headers)
-    .send(body)
-    .expect(200)
-    .then((res) => {
-      expect(res.body).toBeInstanceOf(Object);
-      expect(res.body).toHaveProperty('email');
-      expect(res.body).toHaveProperty('firstName');
-      expect(res.body).toHaveProperty('lastName');
-    }));
-
   test('Should return error when user already exists', () => {
-    return request(app)
-      .post(endpoint)
-      .set(headers)
-      .send(body)
+    return register(body)
       .expect(400)
       .then((res) => {
         expect(res.body).toBeInstanceOf(Object);
@@ -63,10 +37,7 @@ describe('Register new user', () => {
         body = initialBody;
         testCase.before();
 
-        return request(app)
-          .post(endpoint)
-          .set(headers)
-          .send(body)
+        return register(body)
           .expect(400)
           .then((res) => {
             expect(res.body).toBeInstanceOf(Object);
@@ -90,10 +61,7 @@ describe('Register new user', () => {
         body = initialBody;
         testCase.before();
 
-        return request(app)
-          .post(endpoint)
-          .set(headers)
-          .send(body)
+        return register(body)
           .expect(400)
           .then((res) => {
             expect(res.body).toBeInstanceOf(Object);
@@ -117,10 +85,7 @@ describe('Register new user', () => {
         body = initialBody;
         testCase.before();
 
-        return request(app)
-          .post(endpoint)
-          .set(headers)
-          .send(body)
+        return register(body)
           .expect(400)
           .then((res) => {
             expect(res.body).toBeInstanceOf(Object);

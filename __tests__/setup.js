@@ -1,9 +1,15 @@
 const request = require('supertest');
 const app = require('./../server');
 const config = require('./config');
+const { register } = require('./modules');
 
-beforeAll((done) => {
-  request(app)
+beforeEach((done) => {
+  register()({
+    email: config.credentials.username,
+    password: config.credentials.password,
+    firstName: config.customer.firstName,
+    lastName: config.customer.lastName,
+  }).then(() => request(app)
     .post('/oauth/token')
     .set({
       Authorization: config.credentials.basicAuth,
@@ -17,12 +23,14 @@ beforeAll((done) => {
     .then((res) => {
       global.TEST_ACCESS_TOKEN = res.body.access_token;
       global.TEST_REFRESH_TOKEN = res.body.refresh_token;
-      done();
-    });
-});
 
-beforeEach((done) => {
-  process.env.TEST_ACCESS_TOKEN = `Bearer ${global.TEST_ACCESS_TOKEN}`;
-  process.env.TEST_REFRESH_TOKEN = global.TEST_REFRESH_TOKEN;
-  done();
+      process.env.TEST_ACCESS_TOKEN = `Bearer ${global.TEST_ACCESS_TOKEN}`;
+      process.env.TEST_REFRESH_TOKEN = global.TEST_REFRESH_TOKEN;
+
+      done();
+    }));
+  //
+  // process.env.TEST_ACCESS_TOKEN = `Bearer ${global.TEST_ACCESS_TOKEN}`;
+  // process.env.TEST_REFRESH_TOKEN = global.TEST_REFRESH_TOKEN;
+  // done();
 });

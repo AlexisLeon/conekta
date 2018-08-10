@@ -44,7 +44,10 @@ app.use((req, res, next) => {
   const apiPort = conf.get('app:port');
   const port = (apiPort === '80' ? '' : (`:${apiPort}`));
 
-  if (!isProduction) console.log('Request: ', req.body);
+  if (!isProduction) {
+    console.log('Request: ', req.body);
+    console.log('Headers: ', req.headers);
+  }
 
   res.header('Access-Control-Allow-Origin', apiHost + port);
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
